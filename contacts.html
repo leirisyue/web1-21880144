@@ -115,16 +115,22 @@
                   <label for="message" class="form-label">Message *</label>
                   <textarea class="form-control" name="message" id="message" rows="3" required></textarea>
                </div>
-               <div class="text-end">
-                  <div class="form-check">
-                     <label class="form-check-label" for="copy">
-                        send copy to yourself &nbsp;
-                     </label>
-                     <input type="checkbox" value="1" id="copy"> &nbsp;&nbsp;
-                     <button type="submit" class="btn btn-primary">Send Email to Us</button>
+               <div class="row">
+                  <div class="col">
+                     <div id="resposeMessage" class="text-info"></div>
+                  </div>
+                  <div class="col">
+                     <div class="text-end">
+                        <div class="form-check">
+                           <label class="form-check-label" for="copy">
+                              send copy to yourself &nbsp;
+                           </label>
+                           <input type="checkbox" value="1" id="copy"> &nbsp;&nbsp;
+                           <button type="submit" class="btn btn-primary">Send Email to Us</button>
+                        </div>
+                     </div>
                   </div>
                </div>
-               <div id="resposeMessage" class="text-info text-center"></div>
             </form>
          </div>
       </section>
@@ -212,24 +218,30 @@
          e.preventDefault();
          grecaptcha.enterprise.ready(function () {
             grecaptcha.enterprise.execute('6Lc0mqAiAAAAALSd4NhT7Lz0CgnQ3tpABoAVRCUq', { action: 'submit' }).then(async function (token) {
-               let response = await fetch('verify.php',{
+               let response = await fetch('verify.php', {
                   method: 'POST',
-                  headers:{
-                     'content-Type':'application/json',
-                     'Accept':'application/json',
+                  headers: {
+                     'content-Type': 'application/json',
+                     'Accept': 'application/json',
                   },
-                  body: JSON.stringify({'g-token':token})
+                  body: JSON.stringify({ 'g-token': token })
                });
-               if(response.status == 200){
+               if (response.status == 200) {
                   sendMail();
-               } else{
-                  document.getElementById('resposeMessage').innerHTML = 'Error: can not verify RECAPTCHA';
+               } else {
+                  let resposeMessage = document.getElementById('resposeMessage')
+                  resposeMessage.innerHTML = 'Error: can not verify RECAPTCHA';
+                  resposeMessage.classList.remove();
+                  resposeMessage.classList.toggle('text-danger');
                }
             });
          });
       }
-      function sendMail(){
-         document.getElementById('resposeMessage').innerHTML = 'OK'
+      function sendMail() {
+         let resposeMessage = document.getElementById('resposeMessage')
+         resposeMessage.innerHTML = 'OK'
+         resposeMessage.classList.remove();
+         resposeMessage.classList.toggle('text-info');
       }
    </script>
 
