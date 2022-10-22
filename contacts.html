@@ -117,7 +117,7 @@
                </div>
                <div class="row">
                   <div class="col">
-                     <div id="resposeMessage" class="text-info"></div>
+                     <div id="resposeMessage" class="text-success"></div>
                   </div>
                   <div class="col">
                      <div class="text-end">
@@ -237,11 +237,39 @@
             });
          });
       }
-      function sendMail() {
+      async function sendMail() {
          let resposeMessage = document.getElementById('resposeMessage')
-         resposeMessage.innerHTML = 'OK'
-         resposeMessage.classList.remove();
-         resposeMessage.classList.toggle('text-info');
+         try {
+            let token = await getAuthenticateToken('test', '1c3cr3@m')
+            let postData = {
+               name: document.getElementById('name').value,
+               email: document.getElementById('email').value,
+               subject: document.getElementById('subject').value,
+               message: document.getElementById('message').value,
+               copy: document.getElementById('message').value
+            }
+            let response = await fetch(`${AUTHENTICATE_API}/send`,{
+               mehtod: 'POST',
+               headers: {
+                  'Content-Type':'application/json',
+                  'Accept':'application/json',
+                  "Authorization":'Bearer' + token
+               },
+               body: Json.stringify(postData)
+            })
+            let result = await response.json();
+            if(response.status == 200){
+               resposeMessage.innerHTML = result.message
+               resposeMessage.classList.remove();
+               resposeMessage.classList.toggle('text-success');
+            } else {
+               throw new Error(result.message)
+            }
+         } catch (error) {
+            resposeMessage.innerHTML = error
+            resposeMessage.classList.remove();
+            resposeMessage.classList.toggle('text-danger');
+         }
       }
    </script>
 
