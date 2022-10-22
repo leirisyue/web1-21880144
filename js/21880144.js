@@ -73,6 +73,11 @@ function displayControl(isLogin = true){
       linkLogin[i].style.display = displayLogin
       linkLogout[i].style.display = displayLogout
    }
+
+   let leaveComment = document.getElementById('leave-comment');
+   if(leaveComment){
+      leaveComment.style.display = displayLogout
+   }
 }
 
 async function checkLogin(){
@@ -89,7 +94,7 @@ async function verifyToken(){
             'Content-Type':'application/json',
             'Accept':'application/json',
             'Authorization':'Bearer' + token
-         }
+         },
       });
       if(response.status == 200){
          return true
