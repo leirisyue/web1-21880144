@@ -97,16 +97,16 @@
             <p class="text-black-50"><i>Send an email. All fields with an * are requied</i></p>
             <form action="#" method="post" class="text-black-50" onsubmit="onSubmit(event)">
                <div class="row">
-                  <div class="mb-3">
+                  <div class="mb-3 col">
                      <label for="name" class="form-label">Name *</label>
                      <input type="text" class="form-control" name="name" id="name" placeholder="" required>
                   </div>
-                  <div class="mb-3">
+                  <div class="mb-3 col">
                      <label for="email" class="form-label">Email *</label>
                      <input type="text" class="form-control" name="email" id="email" placeholder="" required
                         pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$">
                   </div>
-                  <div class="mb-3">
+                  <div class="mb-3 col">
                      <label for="subject" class="form-label">Subject *</label>
                      <input type="text" class="form-control" name="subject" id="subject" placeholder="" required>
                   </div>
@@ -124,6 +124,7 @@
                      <button type="submit" class="btn btn-primary">Send Email to Us</button>
                   </div>
                </div>
+               <div id="message" class="text-info text-center"></div>
             </form>
          </div>
       </section>
