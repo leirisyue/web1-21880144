@@ -134,3 +134,14 @@ footer {
    background-color: var(--web1-blue);
    color: white;
 }
+/* --------------------------------about------------------------------------------- */
+#testimonials{
+   background-color: var(--web1-pink);
+}
+#testimonials .col{
+   background: url('../images/quot.png') left top no-repeat;
+   padding-left: 3rem;
+}
+#about-us h4{
+   color: black;
+}
