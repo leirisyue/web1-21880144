@@ -124,7 +124,7 @@
                      <button type="submit" class="btn btn-primary">Send Email to Us</button>
                   </div>
                </div>
-               <div id="respomseMessage" class="text-info text-center"></div>
+               <div id="resposeMessage" class="text-info text-center"></div>
             </form>
          </div>
       </section>
@@ -223,13 +223,13 @@
                if(response.status == 200){
                   sendMail();
                } else{
-                  document.getElementById('responseMessage').innerHTML = 'Error: can not verify RECAPTCHA';
+                  document.getElementById('resposeMessage').innerHTML = 'Error: can not verify RECAPTCHA';
                }
             });
          });
       }
       function sendMail(){
-         document.getElementById('respomseMessage').innerHTML = 'OK'
+         document.getElementById('resposeMessage').innerHTML = 'OK'
       }
    </script>
 
