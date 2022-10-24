@@ -141,29 +141,7 @@
       integrity="sha512-RNLkV3d+aLtfcpEyFG8jRbnWHxUqVZozacROI4J2F1sTaDqo1dPQYs01OMi1t1w9Y2FdbSCDSQ2ZVdAC8bzgAg=="
       crossorigin="anonymous" referrerpolicy="no-referrer"></script>
    <script src="js/21880144.js"></script>
-   <!-- search -->
-   <script id="search-template" type="text/x-handlebars-template">
-      {{#each data}}
-         <div class="py-3">
-            <a href="#" onclick="loadData('{{type}}/{{id}}','details-template','content')" class="text-decoration-none"><h1 class="text-black">{{name}}</h1></a>
-            <div class="text-black-50">{{summary}}</div>
-         </div>
-      {{/each}}
-   </script>
-   <!-- end search -->
-   <!-- detail -->
-   <script id="details-template" type="text/x-handlebars-template">
-      {{#each data}}
-         <h1>{{name}}</h1>
-         {{#if imagepath}}
-            <img src="{{imagepath}}" alt="{{name}}" class="float-start me-3">
-         {{/if}}
-         <div class="text-black-50">{{{description}}}</div>
-      {{/each}}
-   </script>
-   <!-- end detail -->
 
-   <!-- end gallery -->
    <script>
       checkLogin();
       let searchParams = new URLSearchParams(location.search);

@@ -144,27 +144,7 @@
       integrity="sha512-RNLkV3d+aLtfcpEyFG8jRbnWHxUqVZozacROI4J2F1sTaDqo1dPQYs01OMi1t1w9Y2FdbSCDSQ2ZVdAC8bzgAg=="
       crossorigin="anonymous" referrerpolicy="no-referrer"></script>
    <script src="js/21880144.js"></script>
-   <!-- nav ul -->
-   <script id="gallery-categories-template" type="text/x-handlebars-template">
-      <li class="nav-item">
-         <a class="nav-link active ps-0 disabled" href="#" aria-current="page" onclick="loadData('gallery', 'gallery-template', 'gallery');disableLink(this)">Show all</a>
-      </li>
-      {{#each data}}
-         <li class="nav-item">
-            <a class="nav-link" href="#" aria-current="page" onclick="loadData('gallery/categories/{{id}}','gallery-template','gallery');disableLink(this)">{{name}}</a>
-         </li>
-      {{/each}}
-   </script>
-   <!-- end nav ul -->
-   <!-- gallery -->
-   <script id="gallery-template" type="text/x-handlebars-template">
-      {{#each data}}
-         <div class="col-md-3">
-            <img src="{{thumbpath}}" alt="{{name}}" class="img-thumbnail mb-3">
-         </div>
-      {{/each}}
-   </script>
-   <!-- end gallery -->
+
    <script>
       checkLogin();
       loadData('gallery-categories', 'gallery-categories-template', 'gallery-categories')
