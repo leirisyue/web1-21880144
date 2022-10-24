@@ -50,8 +50,9 @@
                   <a class="nav-link linkLogout" href="#" onclick="logout()" style="display: none">Logout</a>
                </li>
             </ul>
-            <form class="d-flex my-2 my-lg-0 border rounded-pill" id="formsearch">
-               <input class="form-control ms-3 border-0" type="text" placeholder="Search">
+            <form class="d-flex my-2 my-lg-0 border rounded-pill" id="formsearch" method="GET" action="search.html">
+               <input class="form-control ms-3 border-0" type="text" placeholder="Search" name="keyword" id="keyword"
+                  required>
                <button class="btn my-2 my-sm-0 border-0" type="submit">
                   <i class="fa fa-solid fa-magnifying-glass "></i>
                </button>
@@ -145,11 +146,11 @@
          </div>
       </div>
       <!-- end about us -->
-      
+
       <section class="container py-5" id="news">
          <h1 class="text-back-10">News</h1>
       </section>
-      
+
    </div>
    <!-- footer -->
    <footer class="text-center contaiter-fluid text-white py-3">
@@ -195,10 +196,12 @@
                <form action="#" method="post" id="formLogin" onsubmit="login(event)">
                   <h3 class="text-center">Login Form</h3>
                   <div class="mb-3">
-                     <input type="text" name="username" id="username" placeholder="Username" class="form-control" required>
+                     <input type="text" name="username" id="username" placeholder="Username" class="form-control"
+                        required>
                   </div>
                   <div class="mb-3">
-                     <input type="password" name="password" id="password" placeholder="Password" class="form-control" required>
+                     <input type="password" name="password" id="password" placeholder="Password" class="form-control"
+                        required>
                   </div>
                   <button type="submit" class="form-control btn">Login</button>
                </form>
@@ -209,10 +212,7 @@
          </div>
       </div>
    </div>
-   <script>
-      const myModal = new bootstrap.Modal(document.getElementById('modalId'), options)
-   </script>
-   <!--  -->
+   <!-- end modal -->
    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
       integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous">
       </script>
@@ -232,7 +232,8 @@
                   <img src="{{imagepath}}" alt="{{name}}" onmouseover="setActiveImagepath(this,'{{imagepath}}')" onmouseout="setActiveImagepath(this,'{{imagepath}}',false)">
                   <h3>{{name}}</h3>
                   <p class="text-black-50">{{summary}}</p>
-                  <a class="readmore btn btn-link pt-0" onclick="loadData('products/{{id}}','details-template','content')">Read more</a>
+                  <!-- <a class="readmore btn btn-link pt-0" onclick="loadData('products/{{id}}','details-template','content')">Read more</a> -->
+                  <a class="readmore btn btn-link pt-0" href="?request=products/{{id}}">Read more</a>
                </div>
             {{/each}}
          </div>
@@ -247,7 +248,8 @@
                   <div class="date text-white text-center rounded-4 py-1">
                      <h3>{{date}}</h3>
                   </div>
-                  <a class="btn btn-link readmore ps-0" onclick="loadData('news/{{id}}','details-template','content')">Read more</a>
+                  <!-- <a class="btn btn-link readmore ps-0" onclick="loadData('news/{{id}}','details-template','content')">Read more</a> -->
+                  <a class="btn btn-link readmore ps-0" href="?request=news/{{id}}">Read more</a>
                </div>
                <div>
                   <h3>{{name}}</h3>
@@ -270,13 +272,19 @@
    </script>
    <!-- end detail -->
    <script>
-      checkLogin();
-      loadData('products', 'products-template', 'product')
-      loadData('news', 'news-template', 'news')
-      function setActiveImagepath(img,imagepath, isActive = true){
-         if(isActive){
-            img.src = imagepath.replace('.','-active.');
-         } else{
+      let searchParams = new URLSearchParams(location.search);
+      let request = searchParams.get('request');
+      if (request) {
+         loadData(request, 'details-template', 'content')
+      } else {
+         checkLogin();
+         loadData('products', 'products-template', 'product')
+         loadData('news', 'news-template', 'news')
+      }
+      function setActiveImagepath(img, imagepath, isActive = true) {
+         if (isActive) {
+            img.src = imagepath.replace('.', '-active.');
+         } else {
             img.src = imagepath;
          }
          img.nextElementSibling.classList.toggle('web1-text-blue');

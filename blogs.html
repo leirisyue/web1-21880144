@@ -50,8 +50,8 @@
                   <a class="nav-link linkLogout" href="#" onclick="logout()" style="display: none">Logout</a>
                </li>
             </ul>
-            <form class="d-flex my-2 my-lg-0 border rounded-pill" id="formsearch">
-               <input class="form-control ms-3 border-0" type="text" placeholder="Search">
+            <form class="d-flex my-2 my-lg-0 border rounded-pill" id="formsearch" method="GET" action="search.html">
+               <input class="form-control ms-3 border-0" type="text" placeholder="Search" name="keyword" id="keyword" required>
                <button class="btn my-2 my-sm-0 border-0" type="submit">
                   <i class="fa fa-solid fa-magnifying-glass "></i>
                </button>
@@ -304,7 +304,7 @@
                headers:{
                   'Content-Type':'application/json',
                   'Accept':'application/json',
-                  'Authorization':'Bearer' + token
+                  'Authorization':'Bearer ' + token
                },
                body:JSON.stringify(postData)
             });
