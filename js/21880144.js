@@ -28,8 +28,9 @@ async function loadDataJson(request, templateId, viewId, currentPage = 1) {
    const context = await response.json();
    context.currentPage = currentPage;
    context.request = request;
-   var source = document.getElementById(templateId).innerHTML;
-   var template = Handlebars.compile(source);
+   // var source = document.getElementById(templateId).innerHTML;
+   // var template = Handlebars.compile(source);
+   var template = Handlebars.templates[`${templateId}`]
    var view = document.getElementById(viewId);
    view.innerHTML = template(context);
 }

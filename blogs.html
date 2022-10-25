@@ -51,7 +51,8 @@
                </li>
             </ul>
             <form class="d-flex my-2 my-lg-0 border rounded-pill" id="formsearch" method="GET" action="search.html">
-               <input class="form-control ms-3 border-0" type="text" placeholder="Search" name="keyword" id="keyword" required>
+               <input class="form-control ms-3 border-0" type="text" placeholder="Search" name="keyword" id="keyword"
+                  required>
                <button class="btn my-2 my-sm-0 border-0" type="submit">
                   <i class="fa fa-solid fa-magnifying-glass "></i>
                </button>
@@ -139,10 +140,12 @@
       integrity="sha384-7VPbUDkoPSGFnVtYi0QogXtr74QeVeeIs99Qfg5YCF+TidwNdjvaKZX19NZ/e6oz" crossorigin="anonymous">
       </script>
    <!-- handlebag -->
-   <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.7/handlebars.min.js"
-      integrity="sha512-RNLkV3d+aLtfcpEyFG8jRbnWHxUqVZozacROI4J2F1sTaDqo1dPQYs01OMi1t1w9Y2FdbSCDSQ2ZVdAC8bzgAg=="
+   <!-- handlebag -->
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.7/handlebars.runtime.min.js"
+      integrity="sha512-1JsLHOJ3aKKxY96SA64yDTGQXo46wjivsGj6LiZGQaz0V6cGpGjfFOm1fnH9WkNwf8FFaIU8jVrvAjSESKESww=="
       crossorigin="anonymous" referrerpolicy="no-referrer"></script>
    <script src="js/handlebars-pagination-helper.js"></script>
+   <script src="js/blogs.templates.js" type="text/javascript"></script>
    <script src="js/21880144.js"></script>
 
    <script>
@@ -168,7 +171,7 @@
          }
       }
 
-      async function addComment(e){
+      async function addComment(e) {
          e.preventDefault();
          let token = localStorage.getItem('token');
          let postData = {
@@ -179,23 +182,23 @@
             agree: (document.getElementById('agree').value == 1)
          }
          let responseMessage = document.getElementById('responseMessage')
-         try{
-            let response = await fetch(`${AUTHENTICATE_API}/comment`,{
+         try {
+            let response = await fetch(`${AUTHENTICATE_API}/comment`, {
                method: 'POST',
-               headers:{
-                  'Content-Type':'application/json',
-                  'Accept':'application/json',
-                  'Authorization':'Bearer ' + token
+               headers: {
+                  'Content-Type': 'application/json',
+                  'Accept': 'application/json',
+                  'Authorization': 'Bearer ' + token
                },
-               body:JSON.stringify(postData)
+               body: JSON.stringify(postData)
             });
             let result = await response.json();
-            if(response.status == 200){
-               loadDataDetail(postData.blogId,true);
-            }else {
+            if (response.status == 200) {
+               loadDataDetail(postData.blogId, true);
+            } else {
                throw new Error(result.message)
             }
-         }catch (error){
+         } catch (error) {
             responseMessage.innerHTML = error;
             responseMessage.className = 'text-danger'
          }
